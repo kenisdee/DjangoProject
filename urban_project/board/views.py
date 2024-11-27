@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from board.models import Advertisement
 from board.forms import AdvertisementForm
 from django.contrib.auth.decorators import login_required
@@ -46,3 +46,15 @@ def add_advertisement(request):
     else:
         form = AdvertisementForm()
     return render(request, 'board/add_advertisement.html', {'form': form})
+
+@login_required
+def edit_advertisement(request, pk):
+    advertisement = get_object_or_404(Advertisement, pk=pk)
+    if request.method == "POST":
+        form = AdvertisementForm(request.POST, instance=advertisement)
+        if form.is_valid():
+            form.save()
+            return redirect('board:advertisement_detail', pk=advertisement.pk)
+    else:
+        form = AdvertisementForm(instance=advertisement)
+    return render(request, 'board/edit_advertisement.html', {'form': form})
