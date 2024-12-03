@@ -1,7 +1,18 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
+
+# Модель для объявления
 class Advertisement(models.Model):
+    """
+    Модель для хранения объявлений.
+
+    Attributes:
+        title (CharField): Заголовок объявления.
+        content (TextField): Содержание объявления.
+        author (ForeignKey): Автор объявления (связь с моделью User).
+        created_at (DateTimeField): Дата и время создания объявления.
+    """
     title = models.CharField(max_length=255)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -10,7 +21,18 @@ class Advertisement(models.Model):
     def __str__(self):
         return self.title
 
+
+# Модель для комментариев к объявлениям
 class Comment(models.Model):
+    """
+    Модель для хранения комментариев к объявлениям.
+
+    Attributes:
+        advertisement (ForeignKey): Объявление, к которому относится комментарий (связь с моделью Advertisement).
+        author (ForeignKey): Автор комментария (связь с моделью User).
+        content (TextField): Содержание комментария.
+        created_at (DateTimeField): Дата и время создания комментария.
+    """
     advertisement = models.ForeignKey(Advertisement, related_name='comments', on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()

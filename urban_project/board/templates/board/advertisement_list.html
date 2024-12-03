@@ -9,6 +9,10 @@
   {% for advertisement in advertisements %}
     <li>
       <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }}</a>
+      {% if user.is_authenticated and advertisement.author == user %}
+        <a href="{% url 'board:edit_advertisement' pk=advertisement.pk %}"><button>Edit</button></a>
+        <a href="{% url 'board:delete_advertisement' pk=advertisement.pk %}"><button>Delete</button></a>
+      {% endif %}
     </li>
   {% endfor %}
 </ul>
