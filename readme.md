@@ -68,6 +68,7 @@
 
 2. **Заполните форму и нажмите "Submit":**
 
+<img width="411" alt="Снимок экрана 2024-12-04 в 17 57 03" src="https://github.com/user-attachments/assets/f0fe76e1-3370-446e-bb81-26e66d898417">
 
 
 ### Редактирование объявления
@@ -78,7 +79,7 @@
 
 2. **Измените данные и нажмите "Save changes":**
 
-
+<img width="410" alt="Снимок экрана 2024-12-04 в 17 59 17" src="https://github.com/user-attachments/assets/85be7f43-7e0e-4655-a9f3-ee32d8e4f874">
 
 ### Удаление объявления
 
@@ -88,7 +89,7 @@
 
 2. **Подтвердите удаление:**
 
-
+<img width="436" alt="Снимок экрана 2024-12-04 в 18 00 09" src="https://github.com/user-attachments/assets/52203acb-f1c9-46d4-868e-3766eb4113e4">
 
 ## Структура проекта
 
