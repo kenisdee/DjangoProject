@@ -64,7 +64,7 @@
 
 1. **Перейдите на страницу добавления объявления:**
 
-   [http://127.0.0.1:8000/add/](http://127.0.0.1:8000/board/add/)
+   [http://127.0.0.1:8000/board/add/](http://127.0.0.1:8000/board/add/)
 
 2. **Заполните форму и нажмите "Submit":**
 
@@ -75,7 +75,7 @@
 
 1. **Перейдите на страницу редактирования объявления:**
 
-   [http://127.0.0.1:8000/advertisement/1/edit/](http://127.0.0.1:8000/advertisement/1/edit/)
+   [http://127.0.0.1:8000/board/advertisement/1/edit/](http://127.0.0.1:8000/board/advertisement/1/edit/)
 
 2. **Измените данные и нажмите "Save changes":**
 
@@ -85,7 +85,7 @@
 
 1. **Перейдите на страницу удаления объявления:**
 
-   [http://127.0.0.1:8000/advertisement/1/delete/](http://127.0.0.1:8000/advertisement/1/delete/)
+   [http://127.0.0.1:8000/board/advertisement/1/delete/](http://127.0.0.1:8000/board/advertisement/1/delete/)
 
 2. **Подтвердите удаление:**
 
