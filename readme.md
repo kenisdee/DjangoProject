@@ -1,5 +1,3 @@
-### `README.md`
-
 # Django Advertisement Board
 
 Этот проект представляет собой простое веб-приложение на Django для управления объявлениями. Пользователи могут
@@ -68,13 +66,7 @@
 
 2. **Заполните форму и нажмите "Submit":**
 
-   ```html
-   <form method="post">
-       {% csrf_token %}
-       {{ form.as_p }}
-       <button type="submit">Submit</button>
-   </form>
-   ```
+
 
 ### Редактирование объявления
 
@@ -84,13 +76,7 @@
 
 2. **Измените данные и нажмите "Save changes":**
 
-   ```html
-   <form method="post">
-       {% csrf_token %}
-       {{ form.as_p }}
-       <button type="submit">Save changes</button>
-   </form>
-   ```
+
 
 ### Удаление объявления
 
@@ -100,13 +86,7 @@
 
 2. **Подтвердите удаление:**
 
-   ```html
-   <form method="post">
-       {% csrf_token %}
-       <button type="submit">Удалить</button>
-       <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">Отмена</a>
-   </form>
-   ```
+
 
 ## Структура проекта
 
