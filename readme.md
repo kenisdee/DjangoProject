@@ -1,5 +1,6 @@
 # Django Advertisement Board
-<img width="1233" alt="Снимок экрана 2024-12-04 в 17 49 42" src="https://github.com/user-attachments/assets/23773f51-ba28-42c4-b3bf-5faed2bf1a37">
+
+<img width="1228" alt="Снимок экрана 2024-12-04 в 17 54 46" src="https://github.com/user-attachments/assets/66737438-ebb2-4195-b272-3e3aa9ca63fc">
 
 Этот проект представляет собой простое веб-приложение на Django для управления объявлениями. Пользователи могут
 просматривать, добавлять, редактировать и удалять объявления.
