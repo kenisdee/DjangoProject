@@ -1,5 +1,7 @@
 # Django Advertisement Board
 
+<img width="1228" alt="Снимок экрана 2024-12-04 в 17 54 46" src="https://github.com/user-attachments/assets/66737438-ebb2-4195-b272-3e3aa9ca63fc">
+
 Этот проект представляет собой простое веб-приложение на Django для управления объявлениями. Пользователи могут
 просматривать, добавлять, редактировать и удалять объявления.
 
@@ -62,31 +64,32 @@
 
 1. **Перейдите на страницу добавления объявления:**
 
-   [http://127.0.0.1:8000/add/](http://127.0.0.1:8000/add/)
+   [http://127.0.0.1:8000/board/add/](http://127.0.0.1:8000/board/add/)
 
 2. **Заполните форму и нажмите "Submit":**
 
+<img width="411" alt="Снимок экрана 2024-12-04 в 17 57 03" src="https://github.com/user-attachments/assets/f0fe76e1-3370-446e-bb81-26e66d898417">
 
 
 ### Редактирование объявления
 
 1. **Перейдите на страницу редактирования объявления:**
 
-   [http://127.0.0.1:8000/advertisement/1/edit/](http://127.0.0.1:8000/advertisement/1/edit/)
+   [http://127.0.0.1:8000/board/advertisement/1/edit/](http://127.0.0.1:8000/board/advertisement/1/edit/)
 
 2. **Измените данные и нажмите "Save changes":**
 
-
+<img width="410" alt="Снимок экрана 2024-12-04 в 17 59 17" src="https://github.com/user-attachments/assets/85be7f43-7e0e-4655-a9f3-ee32d8e4f874">
 
 ### Удаление объявления
 
 1. **Перейдите на страницу удаления объявления:**
 
-   [http://127.0.0.1:8000/advertisement/1/delete/](http://127.0.0.1:8000/advertisement/1/delete/)
+   [http://127.0.0.1:8000/board/advertisement/1/delete/](http://127.0.0.1:8000/board/advertisement/1/delete/)
 
 2. **Подтвердите удаление:**
 
-
+<img width="436" alt="Снимок экрана 2024-12-04 в 18 00 09" src="https://github.com/user-attachments/assets/52203acb-f1c9-46d4-868e-3766eb4113e4">
 
 ## Структура проекта
 
