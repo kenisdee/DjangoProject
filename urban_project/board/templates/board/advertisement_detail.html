@@ -3,6 +3,9 @@
 {% block content %}
 <h1>{{ advertisement.title }}</h1>
 <p>{{ advertisement.content }}</p>
+{% if advertisement.image %}
+    <img src="{{ advertisement.image.url }}" alt="{{ advertisement.title }}">
+{% endif %}
 
 {% if user.is_authenticated and advertisement.author == user %}
 <a href="{% url 'board:edit_advertisement' pk=advertisement.pk %}">

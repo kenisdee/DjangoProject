@@ -3,10 +3,11 @@ from board.models import Advertisement
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
+from .forms import AdvertisementForm
 from .forms import SignUpForm
+from .models import Advertisement
 
 
 # Функция для выхода пользователя
@@ -97,14 +98,14 @@ def add_advertisement(request):
     """
     Обработка добавления нового объявления.
 
-    Args:
+    Аргументы:
         request (HttpRequest): Объект HTTP-запроса.
 
-    Returns:
+    Возвращает:
         HttpResponse: Отображение формы для добавления объявления или перенаправление на список объявлений после успешного добавления.
     """
     if request.method == "POST":
-        form = AdvertisementForm(request.POST)
+        form = AdvertisementForm(request.POST, request.FILES)
         if form.is_valid():
             advertisement = form.save(commit=False)
             advertisement.author = request.user
@@ -121,16 +122,16 @@ def edit_advertisement(request, pk):
     """
     Обработка редактирования существующего объявления.
 
-    Args:
+    Аргументы:
         request (HttpRequest): Объект HTTP-запроса.
         pk (int): Первичный ключ объявления.
 
-    Returns:
+    Возвращает:
         HttpResponse: Отображение формы для редактирования объявления или перенаправление на детали объявления после успешного редактирования.
     """
     advertisement = get_object_or_404(Advertisement, pk=pk)
     if request.method == "POST":
-        form = AdvertisementForm(request.POST, instance=advertisement)
+        form = AdvertisementForm(request.POST, request.FILES, instance=advertisement)
         if form.is_valid():
             form.save()
             return redirect('board:advertisement_detail', pk=advertisement.pk)

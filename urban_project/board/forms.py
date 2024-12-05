@@ -10,13 +10,13 @@ class AdvertisementForm(forms.ModelForm):
     """
     Форма для создания и редактирования объявлений.
 
-    Attributes:
+    Атрибуты:
         Meta (class): Вложенный класс, определяющий модель и поля для формы.
     """
 
     class Meta:
         model = Advertisement
-        fields = ['title', 'content', 'author']
+        fields = ['title', 'content', 'author', 'image']
 
 
 # Форма для регистрации нового пользователя
