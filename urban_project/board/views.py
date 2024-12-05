@@ -1,5 +1,8 @@
+import os
+
 from board.forms import AdvertisementForm
 from board.models import Advertisement
+from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -8,6 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AdvertisementForm
 from .forms import SignUpForm
 from .models import Advertisement
+from .utils import resize_image
 
 
 # Функция для выхода пользователя
@@ -109,6 +113,17 @@ def add_advertisement(request):
         if form.is_valid():
             advertisement = form.save(commit=False)
             advertisement.author = request.user
+
+            # Уменьшаем изображение
+            if 'image' in request.FILES:
+                image_file = request.FILES['image']
+                image_path = os.path.join(settings.MEDIA_ROOT, image_file.name)
+                with open(image_path, 'wb+') as destination:
+                    for chunk in image_file.chunks():
+                        destination.write(chunk)
+                resize_image(image_path)
+                advertisement.image = image_file.name
+
             advertisement.save()
             return redirect('board:advertisement_list')
     else:
@@ -133,7 +148,19 @@ def edit_advertisement(request, pk):
     if request.method == "POST":
         form = AdvertisementForm(request.POST, request.FILES, instance=advertisement)
         if form.is_valid():
-            form.save()
+            advertisement = form.save(commit=False)
+
+            # Уменьшаем изображение
+            if 'image' in request.FILES:
+                image_file = request.FILES['image']
+                image_path = os.path.join(settings.MEDIA_ROOT, image_file.name)
+                with open(image_path, 'wb+') as destination:
+                    for chunk in image_file.chunks():
+                        destination.write(chunk)
+                resize_image(image_path)
+                advertisement.image = image_file.name
+
+            advertisement.save()
             return redirect('board:advertisement_detail', pk=advertisement.pk)
     else:
         form = AdvertisementForm(instance=advertisement)
