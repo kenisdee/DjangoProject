@@ -2,6 +2,7 @@
 
 {% block content %}
 <h1>{{ advertisement.title }}</h1>
+<p>Author: {{ advertisement.author.username }}</p>
 <p>{{ advertisement.content }}</p>
 {% if advertisement.image %}
     <img src="{{ advertisement.image.url }}" alt="{{ advertisement.title }}">
