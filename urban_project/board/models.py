@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -22,6 +24,13 @@ class Advertisement(models.Model):
 
     def __str__(self):
         return self.title
+
+    def delete(self, *args, **kwargs):
+        # Удаляем изображение из файловой системы
+        if self.image:
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
+        super(Advertisement, self).delete(*args, **kwargs)
 
 
 # Модель для комментариев к объявлениям
