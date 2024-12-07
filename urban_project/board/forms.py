@@ -16,7 +16,7 @@ class AdvertisementForm(forms.ModelForm):
 
     class Meta:
         model = Advertisement
-        fields = ['title', 'content', 'author', 'image']
+        fields = ['title', 'content', 'image']
 
 
 # Форма для регистрации нового пользователя
