@@ -189,3 +189,62 @@ def delete_advertisement(request, pk):
         return redirect('board:advertisement_list')
 
     return render(request, 'board/delete_advertisement.html', {'advertisement': advertisement})
+
+
+@login_required
+def like_advertisement(request, pk):
+    """
+    Обработка лайка объявления.
+
+    Аргументы:
+        request (HttpRequest): Объект HTTP-запроса.
+        pk (int): Первичный ключ объявления.
+
+    Возвращает:
+        HttpResponse: Перенаправление на детали объявления после лайка.
+    """
+    advertisement = get_object_or_404(Advertisement, pk=pk)
+    user = request.user
+
+    if user in advertisement.disliked_by.all():
+        advertisement.disliked_by.remove(user)
+        advertisement.dislikes -= 1
+
+    if user in advertisement.liked_by.all():
+        advertisement.liked_by.remove(user)
+        advertisement.likes -= 1
+    else:
+        advertisement.liked_by.add(user)
+        advertisement.likes += 1
+
+    advertisement.save()
+    return redirect('board:advertisement_detail', pk=advertisement.pk)
+
+@login_required
+def dislike_advertisement(request, pk):
+    """
+    Обработка дизлайка объявления.
+
+    Аргументы:
+        request (HttpRequest): Объект HTTP-запроса.
+        pk (int): Первичный ключ объявления.
+
+    Возвращает:
+        HttpResponse: Перенаправление на детали объявления после дизлайка.
+    """
+    advertisement = get_object_or_404(Advertisement, pk=pk)
+    user = request.user
+
+    if user in advertisement.liked_by.all():
+        advertisement.liked_by.remove(user)
+        advertisement.likes -= 1
+
+    if user in advertisement.disliked_by.all():
+        advertisement.disliked_by.remove(user)
+        advertisement.dislikes -= 1
+    else:
+        advertisement.disliked_by.add(user)
+        advertisement.dislikes += 1
+
+    advertisement.save()
+    return redirect('board:advertisement_detail', pk=advertisement.pk)
