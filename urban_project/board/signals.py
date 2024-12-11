@@ -31,8 +31,15 @@ def decrement_advertisement_count(sender, instance, **kwargs):
     """
     profile, _ = UserProfile.objects.get_or_create(user=instance.author)
     profile.advertisement_count -= 1
-    profile.like_count -= instance.liked_by.count()  # Убираем лайки
-    profile.dislike_count -= instance.disliked_by.count()  # Убираем дизлайки
+
+    # Убираем лайки и дизлайки из статистики
+    profile.like_count -= instance.liked_by.count()
+    profile.dislike_count -= instance.disliked_by.count()
+
+    # Убедимся, что счетчики не становятся отрицательными
+    profile.like_count = max(profile.like_count, 0)
+    profile.dislike_count = max(profile.dislike_count, 0)
+
     profile.save()
 
 
