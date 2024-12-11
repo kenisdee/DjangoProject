@@ -1,7 +1,5 @@
 import os
 
-from board.forms import AdvertisementForm
-from board.models import Advertisement
 from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth import logout
@@ -12,7 +10,7 @@ from .forms import AdvertisementForm
 from .forms import SignUpForm
 from .models import Advertisement
 from .utils import resize_image
-
+from .signals import update_like_dislike_count
 
 # Функция для выхода пользователя
 def logout_view(request):
@@ -196,11 +194,11 @@ def like_advertisement(request, pk):
     """
     Обработка лайка объявления.
 
-    Аргументы:
+    Args:
         request (HttpRequest): Объект HTTP-запроса.
         pk (int): Первичный ключ объявления.
 
-    Возвращает:
+    Returns:
         HttpResponse: Перенаправление на детали объявления после лайка.
     """
     advertisement = get_object_or_404(Advertisement, pk=pk)
@@ -218,6 +216,10 @@ def like_advertisement(request, pk):
         advertisement.likes += 1
 
     advertisement.save()
+
+    # Обновляем статистику
+    update_like_dislike_count(sender=Advertisement, instance=advertisement)
+
     return redirect('board:advertisement_detail', pk=advertisement.pk)
 
 @login_required
@@ -225,11 +227,11 @@ def dislike_advertisement(request, pk):
     """
     Обработка дизлайка объявления.
 
-    Аргументы:
+    Args:
         request (HttpRequest): Объект HTTP-запроса.
         pk (int): Первичный ключ объявления.
 
-    Возвращает:
+    Returns:
         HttpResponse: Перенаправление на детали объявления после дизлайка.
     """
     advertisement = get_object_or_404(Advertisement, pk=pk)
@@ -247,4 +249,8 @@ def dislike_advertisement(request, pk):
         advertisement.dislikes += 1
 
     advertisement.save()
+
+    # Обновляем статистику
+    update_like_dislike_count(sender=Advertisement, instance=advertisement)
+
     return redirect('board:advertisement_detail', pk=advertisement.pk)

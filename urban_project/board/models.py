@@ -59,3 +59,23 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.author} on {self.advertisement}'
+
+
+class UserProfile(models.Model):
+    """
+    Модель профиля пользователя для хранения дополнительной статистики.
+
+    Атрибуты:
+        user (OneToOneField): Связь с моделью User.
+        advertisement_count (PositiveIntegerField): Количество созданных объявлений.
+        like_count (PositiveIntegerField): Количество лайков.
+        dislike_count (PositiveIntegerField): Количество дизлайков.
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    advertisement_count = models.PositiveIntegerField(default=0)
+    like_count = models.PositiveIntegerField(default=0)
+    dislike_count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        """Возвращает строковое представление профиля пользователя."""
+        return self.user.username
