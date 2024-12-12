@@ -5,21 +5,27 @@
 
 <!-- Кнопка добавления объявления -->
 {% if user.is_authenticated %}
-    <a href="{% url 'board:add_advertisement' %}"><button>Add Advertisement</button></a>
+<a href="{% url 'board:add_advertisement' %}">
+    <button>Добавить объявление</button>
+</a>
 {% endif %}
 
 <!-- Список объявлений -->
 <ul>
-  {% for advertisement in advertisements_page %}
+    {% for advertisement in advertisements_page %}
     <li>
-      <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }}</a>
-      <p>Author: {{ advertisement.author.username }}</p>
-      {% if user.is_authenticated and advertisement.author == user %}
-        <a href="{% url 'board:edit_advertisement' pk=advertisement.pk %}"><button>Edit</button></a>
-        <a href="{% url 'board:delete_advertisement' pk=advertisement.pk %}"><button>Delete</button></a>
-      {% endif %}
+        <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }}</a>
+        <p>Автор: {{ advertisement.author.username }}</p>
+        {% if user.is_authenticated and advertisement.author == user %}
+        <a href="{% url 'board:edit_advertisement' pk=advertisement.pk %}">
+            <button>Изменить</button>
+        </a>
+        <a href="{% url 'board:delete_advertisement' pk=advertisement.pk %}">
+            <button>Удалить</button>
+        </a>
+        {% endif %}
     </li>
-  {% endfor %}
+    {% endfor %}
 </ul>
 
 <!-- Пагинация -->
@@ -31,12 +37,12 @@
       <a href="?page={{ advertisements_page.previous_page_number }}">Предыдущая страница</a>
     {% endif %}
 
-    <!-- Текущая страница -->
+      <!-- Текущая страница -->
     <span class="current">
       Страница {{ advertisements_page.number }} из {{ advertisements_page.paginator.num_pages }}.
     </span>
 
-    <!-- Следующая страница -->
+      <!-- Следующая страница -->
     {% if advertisements_page.has_next %}
       <a href="?page={{ advertisements_page.next_page_number }}">Следующая страница</a>
       <a href="?page={{ advertisements_page.paginator.num_pages }}">Последняя страница &raquo;</a>

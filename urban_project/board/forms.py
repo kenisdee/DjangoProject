@@ -17,6 +17,15 @@ class AdvertisementForm(forms.ModelForm):
     class Meta:
         model = Advertisement
         fields = ['title', 'content', 'image']
+        labels = {
+            'title': 'Заголовок',
+            'content': 'Содержание',
+            'image': 'Изображение',
+        }
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Введите заголовок'}),
+            'content': forms.Textarea(attrs={'placeholder': 'Введите содержание'}),
+        }
 
 
 # Форма для регистрации нового пользователя

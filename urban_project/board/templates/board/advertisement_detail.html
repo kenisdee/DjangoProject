@@ -2,30 +2,30 @@
 
 {% block content %}
 <h1>{{ advertisement.title }}</h1>
-<p>Author: {{ advertisement.author.username }}</p>
+<p>Автор: {{ advertisement.author.username }}</p>
 <p>{{ advertisement.content }}</p>
 {% if advertisement.image %}
-    <img src="{{ advertisement.image.url }}" alt="{{ advertisement.title }}">
+<img src="{{ advertisement.image.url }}" alt="{{ advertisement.title }}">
 {% endif %}
 
 <div>
-    <p>Likes: {{ advertisement.likes }}</p>
-    <p>Dislikes: {{ advertisement.dislikes }}</p>
+    <p>Лайки: {{ advertisement.likes }}</p>
+    <p>Дизлайки: {{ advertisement.dislikes }}</p>
     <a href="{% url 'board:like_advertisement' pk=advertisement.pk %}">
-        <button>Like</button>
+        <button>Лайк</button>
     </a>
     <a href="{% url 'board:dislike_advertisement' pk=advertisement.pk %}">
-        <button>Dislike</button>
+        <button>Дизлайк</button>
     </a>
 </div>
 
 {% if user.is_authenticated and advertisement.author == user %}
 <div>
     <a href="{% url 'board:edit_advertisement' pk=advertisement.pk %}">
-        <button>Edit</button>
+        <button>Изменить</button>
     </a>
     <a href="{% url 'board:delete_advertisement' pk=advertisement.pk %}">
-        <button>Delete</button>
+        <button>Удалить</button>
     </a>
 </div>
 {% endif %}
