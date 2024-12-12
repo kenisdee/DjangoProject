@@ -12,6 +12,10 @@ from .models import Advertisement
 from .utils import resize_image
 from .signals import update_like_dislike_count
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+
+
 # Функция для выхода пользователя
 def logout_view(request):
     """
@@ -254,3 +258,34 @@ def dislike_advertisement(request, pk):
     update_like_dislike_count(sender=Advertisement, instance=advertisement)
 
     return redirect('board:advertisement_detail', pk=advertisement.pk)
+
+def advertisement_list(request):
+    """
+    Отображение списка объявлений с пагинацией.
+
+    Args:
+        request (HttpRequest): Объект HTTP-запроса.
+
+    Returns:
+        HttpResponse: Отображение списка объявлений с пагинацией.
+    """
+    # Получаем все объявления
+    advertisements = Advertisement.objects.all().order_by('-created_at')
+
+    # Пагинация
+    paginator = Paginator(advertisements, 5)
+    page = request.GET.get('page')
+
+    try:
+        # Получаем объявления для текущей страницы
+        advertisements_page = paginator.page(page)
+    except PageNotAnInteger:
+        # Если page не является числом, показываем первую страницу
+        advertisements_page = paginator.page(1)
+    except EmptyPage:
+        # Если page находится за пределами диапазона, показываем последнюю страницу
+        advertisements_page = paginator.page(paginator.num_pages)
+
+    return render(request, 'board/advertisement_list.html', {
+        'advertisements_page': advertisements_page,
+    })
